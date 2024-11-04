@@ -1,0 +1,88 @@
+version: 2
+
+sources:
+  - name: raw_data
+    database: DBT_PROJECT
+    schema: L1_LANDING
+    tables:
+      - name: RESELLERS_TYPE1
+        description: "Table containing detailed reseller transaction information"
+        columns:
+          - name: product_name
+            description: "Name of the product sold"
+          - name: quantity
+            description: "Quantity of products sold"
+          - name: total_amount
+            description: "Total transaction amount"
+          - name: sales_channel
+            description: "Channel through which the sale occurred"
+          - name: customer_first_name
+            description: "First name of the customer"
+          - name: customer_last_name
+            description: "Last name of the customer"
+          - name: customer_email
+            description: "Email of the customer"
+          - name: series_city
+            description: "City associated with the product series"
+          - name: created_date
+            description: "Date when the transaction was created, in raw string format"
+          - name: reseller_id
+            description: "Unique identifier of the reseller"
+          - name: transaction_id
+            description: "Unique identifier for the transaction" 
+      - name: CHANNELS          
+        description: "Source table containing channel information"
+        columns:
+          - name: channel_name
+            description: "Name of the channel"
+          - name: channel_id
+            description: "Unique identifier for the channel"
+      - name: PRODUCTS
+        description: "Source table containing product information"
+        columns:
+          - name: name
+            description: "Name of the product"
+          - name: city
+            description: "City where the product is available"
+          - name: price
+            description: "Price of the product"
+          - name: product_id
+            description: "Unique identifier for the product"
+      - name: CUSTOMERS          
+        description: "Source table containing customer information"
+        columns:
+          - name: customer_id
+            description: "Unique identifier for the customer"
+          - name: first_name
+            description: "Customer's first name"
+          - name: last_name
+            description: "Customer's last name"
+          - name: email
+            description: "Customer's email address"
+      - name: MAIN
+        description: "Main table containing transaction data"
+        columns:
+          - name: transaction_id
+            description: "Unique identifier for each transaction"
+          - name: customer_id
+            description: "Customer ID associated with the transaction"
+          - name: product_id
+            description: "Identifier of the purchased product"
+          - name: amount
+            description: "Total amount for the transaction"
+          - name: qty
+            description: "Quantity of products purchased"
+          - name: channel_id
+            description: "Channel ID through which the transaction was made"
+          - name: bought_date
+            description: "Date of purchase in raw string format"
+      - name: RESELLERS
+        description: "Source table containing reseller information"
+        columns:
+          - name: reseller_id
+            description: "Unique identifier for each reseller"
+          - name: reseller_name
+            description: "Name of the reseller"
+          - name: commission_pct
+            description: "Commission percentage earned by the reseller"
+      

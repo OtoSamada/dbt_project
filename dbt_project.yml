@@ -1,0 +1,43 @@
+name: 'dbt_project'
+version: '1.0.0'
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'dbt_project'
+
+# Paths configuration
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+# Directories to be removed by `dbt clean`
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Configuring models
+models:
+  dbt_project:
+    # Source data layer - L1_LANDING
+    sources:
+      +schema: 'L1_LANDING'  # Optional if using sources, otherwise remove
+
+    # Staging models layer - L2_PROCESSING
+    staging:
+      +schema: 'L2_PROCESSING'            # Set schema for all staging models
+      +materialized: 'table'              # Default materialization for staging models
+
+    # Data marts (final data models) layer - L3_CONSUMPTION
+    dm:                                  # Updated to match the actual directory name
+      +schema: 'L3_CONSUMPTION'          # Schema for final data models
+      +materialized: 'table'
+
+      core:
+        customer_purchases_summary:
+          materialized: 'table'
+        product_sales_by_channel:
+          materialized: 'table'
+        reseller_sales_overview:
+          materialized: 'table'

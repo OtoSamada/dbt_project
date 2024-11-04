@@ -1,0 +1,72 @@
+version: 2
+
+models:
+  - name: customer_purchases_summary
+    description: "Summary of total purchases per customer"
+    columns:
+      - name: customer_id
+        description: "Unique identifier for the customer"
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              to: ref('stg_customers')
+              field: stg_customer_id
+
+      - name: total_spent
+        description: "Total amount spent by the customer"
+        tests:
+          - not_null
+
+      - name: total_quantity
+        description: "Total quantity of items purchased by the customer"
+        tests:
+          - not_null
+
+  - name: product_sales_by_channel
+    description: "Total sales and quantity sold for each product by sales channel"
+    columns:
+      - name: product_id
+        description: "Unique identifier for the product"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: stg_product_id
+
+      - name: sales_channel
+        description: "Sales channel through which the product was sold"
+        tests:
+          - not_null
+
+      - name: total_sales
+        description: "Total sales amount for the product in the specified channel"
+        tests:
+          - not_null
+
+      - name: total_quantity_sold
+        description: "Total quantity of the product sold in the specified channel"
+        tests:
+          - not_null
+
+  - name: reseller_sales_overview
+    description: "Total sales and commission earned by each reseller"
+    columns:
+      - name: reseller_id
+        description: "Unique identifier for the reseller"
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              to: ref('stg_resellers')
+              field: stg_reseller_id
+
+      - name: total_sales
+        description: "Total sales amount for the reseller"
+        tests:
+          - not_null
+
+      - name: total_commission_earned
+        description: "Total commission earned by the reseller based on sales"
+        tests:
+          - not_null

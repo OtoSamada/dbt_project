@@ -1,0 +1,15 @@
+# Ignore dbt log and target folders
+target/
+dbt_packages/
+logs/
+
+# Ignore profiles.yml to keep credentials secure
+profiles.yml
+
+# Ignore Python virtual environment if present
+venv/
+.env/
+__pycache__/
+
+# Jupyter Notebook checkpoints if you use Jupyter
+.ipynb_checkpoints/
